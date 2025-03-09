@@ -3,8 +3,8 @@
 - [ ] Overworld
   - [x] Terrain - Flat
   - [x] Trees
-  - [ ] Rocks
-  - [ ] Bushes
+  - [x] Rocks
+  - [x] Bushes
 - [ ] Player Character
   - [ ] Draw character to screen
   - [ ] Point & Click controls
