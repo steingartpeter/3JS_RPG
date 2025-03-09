@@ -1,17 +1,18 @@
 # To Do List
 
-- [ ] Overworld
+- [ ] World
   - [x] Terrain - Flat
   - [x] Trees
   - [x] Rocks
   - [x] Bushes
+  - [x] Prevent trees/rocks/buses intersections
 - [ ] Player Character
   - [ ] Draw character to screen
   - [ ] Point & Click controls
   - [ ] Navigation (ignore obstacles)
     - [ ] A\* algorithm
   - [ ] Improved Navigation (avoid obstacles)
-- [ ] Enemies]
+- [ ] Enemies
   - [ ] Draw enemies on screen (static)
   - [ ] Patrol
 - Combat
