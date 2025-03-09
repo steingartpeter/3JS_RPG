@@ -10,13 +10,57 @@ export class World extends THREE.Mesh {
     this.treeCount = 10;
     this.rockCount = 20;
     this.bushCount = 10;
+    this.trees = new THREE.Group();
+    this.add(this.trees);
+    this.rocks = new THREE.Group();
+    this.add(this.rocks);
+    this.bushes = new THREE.Group();
+    this.add(this.bushes);
 
+    this.generate();
+
+    //console.log(this.#objectMap);
+  }
+
+  generate() {
+    this.clear();
     this.createTerrain();
     this.createTrees();
     this.createRocks();
     this.createBushes();
+  }
 
-    console.log(this.#objectMap);
+  clear() {
+    if (this.terrain) {
+      this.terrain.geometry.dispose();
+      this.terrain.material.dispose();
+      this.remove(this.terrain);
+    }
+    if (this.trees) {
+      this.trees.children.forEach((tree) => {
+        tree.geometry?.dispose();
+        tree.material?.dispose();
+      });
+      this.trees.clear();
+    }
+
+    if (this.rocks) {
+      this.rocks.children.forEach((rock) => {
+        rock.geometry?.dispose();
+        rock.material?.dispose();
+      });
+      this.rocks.clear();
+    }
+
+    if (this.bushes) {
+      this.bushes.children.forEach((bush) => {
+        bush.geometry?.dispose();
+        bush.material?.dispose();
+      });
+      this.bushes.clear();
+    }
+
+    this.#objectMap.clear();
   }
 
   createTerrain() {
@@ -40,9 +84,6 @@ export class World extends THREE.Mesh {
     const treeHeight = 1;
     const treeGeometry = new THREE.ConeGeometry(treeRadius, treeHeight, 8);
     const treeMaterial = new THREE.MeshStandardMaterial({ color: 0x66aa66, flatShading: true });
-    this.trees = new THREE.Group();
-
-    this.add(this.trees);
     for (let ix1 = 0; ix1 < this.treeCount; ix1++) {
       const treeMesh = new THREE.Mesh(treeGeometry, treeMaterial);
       const coords = new THREE.Vector2(Math.floor(this.width * Math.random()), Math.floor(this.height * Math.random()));
@@ -62,8 +103,7 @@ export class World extends THREE.Mesh {
     const radius = 0.4;
 
     const rockMaterial = new THREE.MeshStandardMaterial({ color: 0x424242, flatShading: true });
-    this.bushes = new THREE.Group();
-    this.add(this.bushes);
+
     for (let ix1 = 0; ix1 < this.rockCount; ix1++) {
       const rockGeometry = new THREE.SphereGeometry(radius, 6, 5);
       const reScl = Math.random() * (maxRockRadius - minRockRadius) + minRockRadius;
@@ -74,7 +114,7 @@ export class World extends THREE.Mesh {
       // Don't place objects on top of each other
       if (this.#objectMap.has(`${coords.x}-${coords.y}`)) continue;
       rockMesh.position.set(coords.x + 0.5, 0.0, coords.y + 0.5);
-      this.bushes.add(rockMesh);
+      this.rocks.add(rockMesh);
       this.#objectMap.set(`${coords.x}-${coords.y}`, rockMesh);
     }
   }
@@ -85,8 +125,6 @@ export class World extends THREE.Mesh {
     const bushRadius = 0.4;
 
     const bushMaterial = new THREE.MeshStandardMaterial({ color: 0x336622, flatShading: true });
-    this.bushes = new THREE.Group();
-    this.add(this.bushes);
     for (let ix1 = 0; ix1 < this.bushCount; ix1++) {
       const bushGeometry = new THREE.SphereGeometry(bushRadius, 6, 5);
       const reScl = Math.random() * (maxBushRadius - minBushRadius) + minBushRadius;

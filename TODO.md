@@ -6,6 +6,7 @@
   - [x] Rocks
   - [x] Bushes
   - [x] Prevent trees/rocks/buses intersections
+  - [x] Add control to UI for wrold
 - [ ] Player Character
   - [ ] Draw character to screen
   - [ ] Point & Click controls
