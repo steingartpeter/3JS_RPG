@@ -3,22 +3,36 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import Stats from "three/examples/jsm/libs/stats.module.js";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import { World } from "./world";
+import { Player } from "./player";
 
 const gui = new GUI();
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
+renderer.setPixelRatio(devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 camera.position.set(10, 5, 10);
 // Camera controller
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(5, 0, 5);
+camera.position.set(0, 2, 0);
+controls.update();
 // Add a TERRAIN:
 const world = new World(10, 10);
 scene.add(world);
+
+// Instantaite player
+const plyr = new Player(camera, world.terrain);
+scene.add(plyr);
 
 // Create a light
 const sun = new THREE.DirectionalLight();
@@ -43,8 +57,6 @@ scene.add(ambient);
 const stats = new Stats();
 document.body.appendChild(stats.dom);
 
-camera.position.z = 5;
-controls.update();
 function animate() {
   // cube.rotation.x += 0.01;
   // cube.rotation.y += 0.01;
