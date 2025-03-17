@@ -29,11 +29,11 @@ export class Player extends THREE.Mesh {
     const intersections = this.raycaster.intersectObject(this.world.terrain);
     //Renderer.render(terrain, camera);
     if (intersections.length > 0) {
+      const playerCoords = new THREE.Vector2(Math.floor(this.position.x), Math.floor(this.position.z));
       const selectedCoords = new THREE.Vector2(Math.floor(intersections[0].point.x), Math.floor(intersections[0].point.z));
       // Calculate new plaes coordinates from eintersection object's data
-      this.position.set(selectedCoords.x + 0.5, 0.5, selectedCoords.y + 0.5);
-      search(selectedCoords, null, this.world);
-      console.log(selectedCoords);
+      // this.position.set(selectedCoords.x + 0.5, 0.5, selectedCoords.y + 0.5);
+      search(playerCoords, selectedCoords, this.world);
     }
   }
 }
