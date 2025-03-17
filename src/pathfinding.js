@@ -98,6 +98,8 @@ function getNeighbours(coords, world, visited) {
     neighbors.push(new Vector2(coords.x, coords.y + 1));
   }
   // Exclude VISITED squares
-  neighbors = neighbors.filter((coords) => !visited.has(getKey(coords)));
+  neighbors = neighbors.filter((coords) => {
+    return !visited.has(getKey(coords));
+  });
   return neighbors;
 }
