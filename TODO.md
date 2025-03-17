@@ -8,10 +8,11 @@
   - [x] Prevent trees/rocks/buses intersections
   - [x] Add control to UI for wrold
 - [ ] Player Character
-  - [ ] Draw character to screen
-  - [ ] Point & Click controls
+  - [x] Draw character to screen
+  - [x] Point & Click controls
   - [ ] Navigation (ignore obstacles)
     - [ ] A\* algorithm
+    - [ ] worls => get(x,z)
   - [ ] Improved Navigation (avoid obstacles)
 - [ ] Enemies
   - [ ] Draw enemies on screen (static)
